@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <filename>"
+  exit 1
+fi
+
+filename=$1
+
+if [ ! -f "$filename" ]; then
+  echo "Error: $filename does not exist"
+  exit 1
+fi
+
+article_count=$(grep -ioE '\b(a|an|the)\b' "$filename" | wc -l)
+
+echo "Number of articles in $filename: $article_count"
+
